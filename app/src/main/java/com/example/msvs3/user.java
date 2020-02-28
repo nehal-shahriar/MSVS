@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import com.google.android.material.tabs.TabLayout;
@@ -13,6 +15,7 @@ public class user extends AppCompatActivity {
     private ViewPagerAdapter viewPagerAdapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    Button osmanycaptbtn;
 
 
     @Override
@@ -32,7 +35,7 @@ public class user extends AppCompatActivity {
 
         viewPagerAdapter.addFragment(new votevents(),"event");
         viewPagerAdapter.addFragment(new result(),"result");
-        viewPagerAdapter.addFragment(new result(),"candidate");
+        viewPagerAdapter.addFragment(new candidate(),"candidate");
         viewPagerAdapter.addFragment(new userprofile(),"profile");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -44,6 +47,41 @@ public class user extends AppCompatActivity {
         tabLayout.getTabAt(1).setText("result");
         tabLayout.getTabAt(2).setText("candidate");
         tabLayout.getTabAt(3).setText("profile");
+        //osmanycaptbtn=findViewById(R.id.osmanycaptbtn);
+        /*if(tabLayout.getSelectedTabPosition()==0){
+        osmanycaptbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(user.this,MainActivity.class);
+            }
+        });
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+                if(tab.getPosition()==0){
+                    osmanycaptbtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent=new Intent(user.this,MainActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });*/
+        }
+
 
     }
-}
+
