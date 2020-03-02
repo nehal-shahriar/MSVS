@@ -46,7 +46,7 @@ public class votevents extends Fragment {
             public void onClick(View view) {
                 //Intent intent=new Intent(getActivity(),MainActivity.class);
                 //startActivity(intent);
-                Toast.makeText(getActivity(),"bal",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"testing",Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(getActivity(),osmanyhallcapt.class);
                 startActivity(intent);
             }
