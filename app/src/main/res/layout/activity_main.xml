@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg5"
     tools:context=".MainActivity">
 
     <TextView
@@ -12,8 +13,9 @@
         android:layout_height="79dp"
         android:text="WELCOME TO MIST SMART VOTING SYSTEM"
         android:textAlignment="center"
-        android:textColor="#050505"
-        android:textSize="24sp"
+        android:textColor="#F0EAEA"
+        android:textSize="30sp"
+        android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -87,7 +89,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:text="Want to register as a new voter?"
-        android:textColor="#0E0E0E"
+        android:textColor="#F5E9E9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.041"
