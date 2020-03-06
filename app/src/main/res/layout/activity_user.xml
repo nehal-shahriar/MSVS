@@ -10,7 +10,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="#1B1E23"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:id="@+id/appbarlayout">
 
@@ -18,15 +18,39 @@
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         app:popupTheme="@style/Theme.AppCompat.Light"
-        android:background="@color/colorPrimary"
-        android:layout_height="?attr/actionBarSize"/>
+        android:background="#1B1E23"
+        android:layout_height="?attr/actionBarSize">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/exitbtn"
+                android:layout_width="44dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.971"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                android:foreground="@drawable/exitapp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.Toolbar>
 
 
         <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
             android:id="@+id/tablayout"
             app:tabGravity="fill"
-            app:tabTextColor="@color/colorAccent"
+            app:tabTextColor="@color/white"
             app:tabIndicatorHeight="1.5dp"
             app:tabMode="fixed"
             app:tabIndicatorColor="@color/colorAccent"
