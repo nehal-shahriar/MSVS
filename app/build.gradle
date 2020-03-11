@@ -6,7 +6,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.msvs3"
-        minSdkVersion 15
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -34,4 +34,5 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
     implementation 'me.dm7.barcodescanner:zxing:1.9'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.firebaseui:firebase-ui-database:4.2.1'
 }
