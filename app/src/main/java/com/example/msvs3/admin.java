@@ -29,6 +29,7 @@ public class admin extends AppCompatActivity {
         viewPagerAdapter.addFragment(new createvotevent(),"");
         viewPagerAdapter.addFragment(new edituser(),"");
         viewPagerAdapter.addFragment(new history(),"");
+        viewPagerAdapter.addFragment(new Requestlist(),"");
 
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -39,6 +40,8 @@ public class admin extends AppCompatActivity {
         tabLayout.getTabAt(0).setText("Create Voting Events");
         tabLayout.getTabAt(1).setText("Edit user");
         tabLayout.getTabAt(2).setText("history");
+        tabLayout.getTabAt(3).setText("Request");
+
 
     }
 }

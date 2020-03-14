@@ -73,7 +73,7 @@ public class result extends Fragment {
         recyclerView=view.findViewById(R.id.recylceview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        refreshbtn=view.findViewById(R.id.refreshbtn);
+        //refreshbtn=view.findViewById(R.id.refreshbtn);
 
         arrayList=new ArrayList<DataSetFire>();
 
