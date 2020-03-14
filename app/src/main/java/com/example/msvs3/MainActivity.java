@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             barcodeID=resultCode;
             System.out.println(barcodeID);
             DatabaseReference usersRef ;
-            usersRef = FirebaseDatabase.getInstance().getReference().child("Info");
+            usersRef = FirebaseDatabase.getInstance().getReference().child("Approveduser");
 
             //usersRef.push().child("value").setValue(resultCode);
 
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     for(DataSnapshot data: dataSnapshot.getChildren()) {
                         if (!dataSnapshot.exists()) {
 
-                            Toast.makeText(MainActivity.this, "Not valid", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(MainActivity.this, "Not valid", Toast.LENGTH_SHORT).show();
                         } else {
 
 
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
                         builder.setTitle("Invalid User");
-                        builder.setMessage("Do you want to registration?");
+                        builder.setMessage("Have you already registered?");
 
 
                         builder.setPositiveButton(R.string.YES, new DialogInterface.OnClickListener() {
@@ -126,8 +126,9 @@ public class MainActivity extends AppCompatActivity {
                                 // Do nothing but close the dialog
 
                                 dialog.dismiss();
-                                Intent intent=new Intent(MainActivity.this,registration.class);
-                                startActivity(intent);
+                                //Intent intent=new Intent(MainActivity.this,registration.class);
+                                //startActivity(intent);
+                                Toast.makeText(MainActivity.this, "You are still not approved by admin", Toast.LENGTH_SHORT).show();
 
                             }
                         });
@@ -139,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
 
                                 // Do nothing
                                 dialog.dismiss();
+                                Intent intent=new Intent(MainActivity.this,registration.class);
+                                startActivity(intent);
 
 
                             }

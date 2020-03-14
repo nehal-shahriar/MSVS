@@ -3,7 +3,8 @@
     package="com.example.msvs3">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".approve"></activity>
+        <activity android:name=".detailedprofile" />
+        <activity android:name=".Profile_of_user" />
+        <activity android:name=".registration" />
+        <activity android:name=".givevote" />
+        <activity android:name=".candidateprofile" />
+        <activity android:name=".admin" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".osmanyhallcapt" />
         <activity android:name=".user" />
         <activity android:name=".splash">
