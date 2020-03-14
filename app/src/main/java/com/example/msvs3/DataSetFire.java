@@ -4,14 +4,20 @@ public class DataSetFire {
     String name;
     String id;
     String dept;
+    String cg;
+    String department;
+    String vote;
 
     public DataSetFire() {
     }
 
-    public DataSetFire(String name, String id, String dept) {
+    public DataSetFire(String name, String id, String dept, String cg,String department,String vote) {
         this.name = name;
         this.id = id;
         this.dept = dept;
+        this.cg=cg;
+        this.department=department;
+        this.vote=vote;
     }
 
     public String getName() {
@@ -36,5 +42,29 @@ public class DataSetFire {
 
     public void setDept(String dept) {
         this.dept = dept;
+    }
+
+    public String getCg() {
+        return cg;
+    }
+
+    public void setCg(String cg) {
+        this.cg = cg;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getVote() {
+        return vote;
+    }
+
+    public void setVoteno(String voteno) {
+        this.vote = vote;
     }
 }

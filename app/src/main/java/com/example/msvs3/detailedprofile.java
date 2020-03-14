@@ -18,7 +18,7 @@ public class detailedprofile extends AppCompatActivity {
         candidatedepttxt=findViewById(R.id.candidatedepttxt);
         String teamone=getIntent().getStringExtra("name");
         String teamtwo=getIntent().getStringExtra("id");
-        String teamthree=getIntent().getStringExtra("dept");
+        String teamthree=getIntent().getStringExtra("voteno");
         //Log.i("OUR VALUE",teamone);
         //Log.i("OUR VALUE 2",teamtwo);
         //Log.i("OUR VALUE 3",teamthree);

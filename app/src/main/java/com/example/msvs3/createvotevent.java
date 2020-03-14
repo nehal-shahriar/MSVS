@@ -15,7 +15,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 
@@ -25,12 +29,14 @@ import java.util.Calendar;
  */
 public class createvotevent extends Fragment {
     View view;
-    Calendar c1,c2;
+    Calendar c1,c2,c3;
     DatePickerDialog df1;
-    TimePickerDialog tf;
+    TimePickerDialog tf,tf1;
     String format;
-    Button calenderbtn,timebtn,addcanbtn,voterlistbtn,createbtn;
-    EditText dateedit,timeedit;
+    Button calenderbtn,strttimebtn,endtimebtn,addcanbtn,voterlistbtn,createbtn;
+
+    TextView datetxt,strttimetxt,endtimetxt;
+    private DatabaseReference df;
 
     public createvotevent() {
         // Required empty public constructor
@@ -48,10 +54,14 @@ public class createvotevent extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         calenderbtn=view.findViewById(R.id.calenderbtn);
-        timebtn=view.findViewById(R.id.starttimebtn);
-        dateedit=view.findViewById(R.id.dateedit);
-        timeedit=view.findViewById(R.id.timeedit);
-        //addcanbtn=view.findViewById(R.id.addcanbtn);
+        strttimebtn=view.findViewById(R.id.starttimebtn);
+        endtimebtn=view.findViewById(R.id.endtimebtn);
+
+        datetxt=view.findViewById(R.id.datetxt);
+        strttimetxt=view.findViewById(R.id.starttimetxt);
+        endtimetxt=view.findViewById(R.id.endtimetxt);
+        df= FirebaseDatabase.getInstance().getReference().child("vote_events");
+        addcanbtn=view.findViewById(R.id.addcanbtn);
         calenderbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,13 +69,13 @@ public class createvotevent extends Fragment {
                 int day=c1.get(Calendar.DAY_OF_MONTH);
                 int month=c1.get(Calendar.MONTH);
                 int year=c1.get(Calendar.YEAR);
-                df1=new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                df1=new DatePickerDialog(getActivity(), R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int mYear, int mMonth, int mDay) {
                         //mTv.setText(mDay+"-"+(mMonth+1)+"-"+mYear);
                         //s1=String.valueOf(mDay)+"-"+String.valueOf(mMonth+1)+"-"+String.valueOf(mYear);
                         //String s=Integer.toString(mYear)+Integer.toString(mMonth+1)+Integer.toString(mDay);
-                        dateedit.setText(mYear+"-"+(mMonth+1)+"-"+mDay);
+                        datetxt.setText(mDay+"-"+(mMonth+1)+"-"+mYear);
 
                     }
                 },day,month,year);
@@ -73,7 +83,7 @@ public class createvotevent extends Fragment {
             }
         });
 
-        timebtn.setOnClickListener(new View.OnClickListener() {
+        strttimebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 c2=Calendar.getInstance();
@@ -81,14 +91,33 @@ public class createvotevent extends Fragment {
                 int minute=c2.get(Calendar.MINUTE);
                 selectedtimeformat(hour);
 
-                tf=new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                tf=new TimePickerDialog(getActivity(), R.style.DialogTheme, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int mHour, int mMinute) {
                         selectedtimeformat(mHour);
-                        timeedit.setText(mHour+":"+mMinute+" "+format);
+                        strttimetxt.setText(mHour+":"+mMinute+" "+format);
                     }
                 },hour,minute,true);
                 tf.show();
+            }
+        });
+
+        endtimebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                c3=Calendar.getInstance();
+                int hour=c3.get(Calendar.HOUR_OF_DAY);
+                int minute=c3.get(Calendar.MINUTE);
+                selectedtimeformat(hour);
+
+                tf1=new TimePickerDialog(getActivity(), R.style.DialogTheme, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int mHour, int mMinute) {
+                        selectedtimeformat(mHour);
+                        endtimetxt.setText(mHour+":"+mMinute+" "+format);
+                    }
+                },hour,minute,true);
+                tf1.show();
             }
         });
 

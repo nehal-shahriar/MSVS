@@ -16,8 +16,23 @@
         <item>Cultural captain</item>
         <item>Osmany hall captain</item>
     </array>
+    <array name="namesofvoters">
+        <item>Select name</item>
+        <item>Rownok</item>
+        <item>prithula</item>
+        <item>Rifat</item>
+        <item>onne</item>
+    </array>
+    <array name="vote">
+        <item>MistCaptain</item>
+        <item>Osmanyhallcaptain</item>
+
+        <item>Info</item>
+    </array>
 
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="YES"><font color='black'>YES</font></string>
+    <string name="NO"><font color='black'>NO</font></string>
 </resources>
