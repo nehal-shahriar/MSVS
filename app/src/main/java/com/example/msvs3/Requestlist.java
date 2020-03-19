@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -61,10 +62,17 @@ public class Requestlist extends Fragment {
         options=new FirebaseRecyclerOptions.Builder<DataSetFire>().setQuery(df,DataSetFire.class).build();
         adapter=new FirebaseRecyclerAdapter<DataSetFire, FirebaseViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull FirebaseViewHolder firebaseViewHolder, int i, @NonNull final DataSetFire dataSetFire) {
+            protected void onBindViewHolder(@NonNull FirebaseViewHolder firebaseViewHolder,final int i, @NonNull final DataSetFire dataSetFire) {
                 firebaseViewHolder.teamone.setText(dataSetFire.getName());
                 firebaseViewHolder.teamtwo.setText(dataSetFire.getId());
                 firebaseViewHolder.teamthree.setText(dataSetFire.getDept());
+                firebaseViewHolder.deletebtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("Info").child(getRef(i).getKey());
+                        databaseReference.removeValue();
+                    }
+                });
                 firebaseViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -74,6 +82,7 @@ public class Requestlist extends Fragment {
                         intent.putExtra("dept",dataSetFire.getDept());
                         intent.putExtra("email",dataSetFire.getEmail());
                         intent.putExtra("barcodeid",dataSetFire.getBarcodeid());
+                        intent.putExtra("position",Integer.toString(i));
                         startActivity(intent);
                     }
                 });
@@ -85,6 +94,7 @@ public class Requestlist extends Fragment {
                 return new FirebaseViewHolder(LayoutInflater.from(getActivity()).inflate(R.layout.row,parent,false));
             }
         };
+        //adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
     }
     @Override

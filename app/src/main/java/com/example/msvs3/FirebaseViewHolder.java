@@ -1,6 +1,7 @@
 package com.example.msvs3;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ public class FirebaseViewHolder extends RecyclerView.ViewHolder {
     public TextView teamone,teamtwo,teamthree;
     public TextView teamname,teamid,teamvoteno;
     public ImageView candidateimg;
+    public Button deletebtn;
     public FirebaseViewHolder(@NonNull View itemView) {
         super(itemView);
         teamone=itemView.findViewById(R.id.teamone);
@@ -19,6 +21,7 @@ public class FirebaseViewHolder extends RecyclerView.ViewHolder {
         teamname=itemView.findViewById(R.id.teamname);
         teamid=itemView.findViewById(R.id.teamid);
         teamvoteno=itemView.findViewById(R.id.teamvoteno);
+        deletebtn=itemView.findViewById(R.id.deletebtn);
         //candidateimg=itemView.findViewById(R.id.candidateimg);
 
     }

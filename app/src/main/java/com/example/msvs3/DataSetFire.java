@@ -9,19 +9,22 @@ public class DataSetFire {
     String vote;
     String email;
     String barcodeid;
+    String position,feed;
 
     public DataSetFire() {
     }
 
-    public DataSetFire(String name, String id, String dept, String cg,String department,String vote,String email, String barcodeid) {
+    public DataSetFire(String name, String id, String dept, String cg, String department, String vote, String email, String barcodeid, String position,String feed) {
         this.name = name;
         this.id = id;
         this.dept = dept;
-        this.cg=cg;
-        this.department=department;
-        this.vote=vote;
-        this.email=email;
-        this.barcodeid=barcodeid;
+        this.cg = cg;
+        this.department = department;
+        this.vote = vote;
+        this.email = email;
+        this.barcodeid = barcodeid;
+        this.position = position;
+        this.feed=feed;
     }
 
     public String getName() {
@@ -68,7 +71,7 @@ public class DataSetFire {
         return vote;
     }
 
-    public void setVoteno(String voteno) {
+    public void setVote(String vote) {
         this.vote = vote;
     }
 
@@ -86,5 +89,21 @@ public class DataSetFire {
 
     public void setBarcodeid(String barcodeid) {
         this.barcodeid = barcodeid;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getFeed() {
+        return feed;
+    }
+
+    public void setFeed(String feed) {
+        this.feed = feed;
     }
 }

@@ -51,7 +51,7 @@ public class candidate extends Fragment {
     private static final int image_pick_code=1000;
     private static final int permission_code=1001;
 
-    String name, cg, propaganda,text;
+    String name, cg, propaganda,text,userkey;
 
     private DatabaseReference df;
 
@@ -175,12 +175,14 @@ public class candidate extends Fragment {
                                     cg=cgedit.getText().toString();
                                     propaganda=proedit.getText().toString();
                                     text = spinner.getSelectedItem().toString();
+                                    userkey=df.push().getKey();
                                     HashMap<String,String> hashMap=new HashMap<>();
                                     hashMap.put("imgurl",String.valueOf(uri));
                                     hashMap.put("name",name);
                                     hashMap.put("cg",cg);
                                     hashMap.put("department",text);
                                     hashMap.put("propaganda",propaganda);
+                                    hashMap.put("key",userkey);
 
                                     df.push().setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override

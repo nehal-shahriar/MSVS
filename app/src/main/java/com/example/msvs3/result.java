@@ -19,7 +19,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseListOptions;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.ChildEventListener;
@@ -47,9 +50,14 @@ public class result extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<DataSetFire> arrayList;
     private FirebaseRecyclerOptions<DataSetFire> options;
-    private FirebaseRecyclerAdapter<DataSetFire,FirebaseViewHolder> adapter;
+    //private FirebaseRecyclerAdapter<DataSetFire,FirebaseViewHolder> adapter;
     private DatabaseReference df;
     Button refreshbtn;
+
+    DatabaseReference df1;
+
+    ArrayList<DataSetFire> mUsername=new ArrayList<>();
+    FirebaseListAdapter adapter;
 
     public result() {
         // Required empty public constructor
@@ -68,19 +76,46 @@ public class result extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         //df= FirebaseDatabase.getInstance().getReference("student");
         //listview=view.findViewById(R.id.lstview);
+
         spinner2=view.findViewById(R.id.spinner2);
         text1 = spinner2.getSelectedItem().toString();
-        recyclerView=view.findViewById(R.id.recylceview);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        df= FirebaseDatabase.getInstance().getReference(text1);
+
+        listview=view.findViewById(R.id.listview);
+        FirebaseListOptions<DataSetFire> options=new FirebaseListOptions.Builder<DataSetFire>()
+                .setLayout(R.layout.rowforvote)
+                .setQuery(df,DataSetFire.class)
+                .build();
+        adapter=new FirebaseListAdapter(options) {
+            @Override
+            protected void populateView(@NonNull View v, @NonNull Object model, int position) {
+
+                DataSetFire gl=(DataSetFire) model;
+                TextView name=v.findViewById(R.id.teamname);
+                TextView id=v.findViewById(R.id.teamid);
+                TextView vote=v.findViewById(R.id.teamvoteno);
+                //TextView time=v.findViewById(R.id.time);
+
+                name.setText(gl.getName().toString());
+                id.setText(gl.getId().toString());
+                vote.setText(gl.getVote().toString());
+                //time.setText(gl.getTime().toString());
+
+            }
+        };
+
+        listview.setAdapter(adapter);
+        //recyclerView=view.findViewById(R.id.recylceview);
+        //recyclerView.setHasFixedSize(true);
+        //recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         //refreshbtn=view.findViewById(R.id.refreshbtn);
 
-        arrayList=new ArrayList<DataSetFire>();
+        //arrayList=new ArrayList<DataSetFire>();
 
 
-        df= FirebaseDatabase.getInstance().getReference().child(text1);
+        //df= FirebaseDatabase.getInstance().getReference().child(text1);
         //Query query=df.orderByChild("name").equalTo(text1);
-        df.keepSynced(true);
+        /*df.keepSynced(true);
         options=new FirebaseRecyclerOptions.Builder<DataSetFire>().setQuery(df,DataSetFire.class).build();
 
         adapter=new FirebaseRecyclerAdapter<DataSetFire, FirebaseViewHolder>(options) {
@@ -91,6 +126,7 @@ public class result extends Fragment {
                 firebaseViewHolder.teamname.setText(model.getName());
                 firebaseViewHolder.teamid.setText(model.getId());
                 firebaseViewHolder.teamvoteno.setText(model.getVote());
+                arrayList.add(model);
                 /*firebaseViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -100,7 +136,7 @@ public class result extends Fragment {
                         intent.putExtra("dept",model.getDept());
                         startActivity(intent);
                     }
-                });*/
+                });
 
             }
 
@@ -111,8 +147,9 @@ public class result extends Fragment {
             }
         };
 
+        adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
-        /*final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,mUsername);
+        final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,mUsername);
         listview.setAdapter(arrayAdapter);
         text = spinner2.getSelectedItem().toString();
         df.addChildEventListener(new ChildEventListener() {

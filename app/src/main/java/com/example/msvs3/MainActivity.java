@@ -24,11 +24,12 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 
 public class MainActivity extends AppCompatActivity {
-    Button userbtn,adminbtn,signbtn;
+    Button userbtn,adminbtn,signbtn,fdbtn;
     Button regbtn;
     private ZXingScannerView scannerView;
     DatabaseReference dref;
     private static String barcodeID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         signbtn=findViewById(R.id.signinbtn);
         regbtn=findViewById(R.id.regbtn);
         adminbtn=findViewById((R.id.adminbtn));
+        fdbtn=findViewById(R.id.fdbtn);
         userbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,7 +64,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        fdbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity .this,feedback.class);
+                startActivity(intent);
+            }
+        });
     }
     public void scanCode(View view){
         scannerView = new ZXingScannerView(this);

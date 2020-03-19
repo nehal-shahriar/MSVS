@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 public class user extends AppCompatActivity {
@@ -20,12 +21,14 @@ public class user extends AppCompatActivity {
     private ImageView profileimg;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         exitapp=findViewById(R.id.exitbtn);
         profileimg=findViewById(R.id.profileimg);
+
         Toolbar toolbar=findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getString(R.string.app_name));
@@ -65,6 +68,7 @@ public class user extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
         }
 

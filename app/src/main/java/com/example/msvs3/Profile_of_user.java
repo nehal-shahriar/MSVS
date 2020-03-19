@@ -3,6 +3,7 @@ package com.example.msvs3;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +31,7 @@ public class Profile_of_user extends AppCompatActivity {
     EditText searchedit;
     Button probtn;
     String barcoderesult;
-
+    FloatingActionButton floatingbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,9 @@ public class Profile_of_user extends AppCompatActivity {
         proimgview = findViewById(R.id.proimgview);
         searchedit = findViewById(R.id.searchedit);
         probtn = findViewById(R.id.probtn);
+
+        floatingbtn=findViewById(R.id.floatingbtn);
+
         //pronametxt.setText(st.getName());
         //proidtxt.setText(st.getId());
         //prodepttext.setText(st.getDept());
@@ -55,7 +60,7 @@ public class Profile_of_user extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        df = FirebaseDatabase.getInstance().getReference().child("Info");
+        df = FirebaseDatabase.getInstance().getReference().child("Approveduser");
         Query query = df.orderByChild("barcodeid").equalTo(barcoderesult);
         query.addValueEventListener(new ValueEventListener() {
             @Override
