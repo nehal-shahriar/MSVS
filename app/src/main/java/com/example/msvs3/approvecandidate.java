@@ -24,7 +24,7 @@ public class approvecandidate extends AppCompatActivity {
         candidateImageview=findViewById(R.id.candidateimageView);
         String teama=getIntent().getStringExtra("name");
         String teamb=getIntent().getStringExtra("cg");
-        String teamc=getIntent().getStringExtra("dept");
+        String teamc=getIntent().getStringExtra("department");
         String teamd=getIntent().getStringExtra("propaganda");
         String teame=getIntent().getStringExtra("image");
         //Log.i("OUR VALUE",teamone);
@@ -35,7 +35,7 @@ public class approvecandidate extends AppCompatActivity {
         appcandidatecgtxt.setText(teamb);
         appcandidatedepttxt.setText(teamc);
         appcandidateprotxt.setText(teamd);
-        final Uri image=Uri.parse(teame);
-        candidateImageview.setImageURI(image);
+        //final Uri image=Uri.parse(teame);
+        //candidateImageview.setImageURI(image);
     }
 }

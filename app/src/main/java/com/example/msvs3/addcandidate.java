@@ -44,7 +44,7 @@ public class addcandidate extends AppCompatActivity {
         setContentView(R.layout.activity_addcandidate);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-        recyclerView=findViewById(R.id.recyclerview1);
+        recyclerView=findViewById(R.id.recyclerview2);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         arrayList=new ArrayList<DataSetFire>();
@@ -61,12 +61,12 @@ public class addcandidate extends AppCompatActivity {
                 firebaseViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(addcandidate.this,detailedprofile.class);
+                        Intent intent=new Intent(addcandidate.this,approvecandidate.class);
                         intent.putExtra("name",model.getName());
                         intent.putExtra("cg",model.getCg());
                         intent.putExtra("department",model.getDepartment());
                         intent.putExtra("propaganda",model.getPropaganda());
-                        intent.putExtra("image",model.getImgurl());
+                        intent.putExtra("imgurl",model.getImgurl());
                         startActivity(intent);
                     }
                 });
