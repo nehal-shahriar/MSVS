@@ -43,7 +43,7 @@ import static android.app.Activity.RESULT_OK;
  */
 public class candidate extends Fragment {
     View view;
-    Spinner spinner;
+    Spinner spinner,eventspinner;
     ImageView imageView;
     Button imgbtn,submitbtn;
     EditText nameedit,cgedit,proedit;
@@ -51,7 +51,7 @@ public class candidate extends Fragment {
     private static final int image_pick_code=1000;
     private static final int permission_code=1001;
 
-    String name, cg, propaganda,text,userkey;
+    String name, cg, propaganda,text,userkey,event;
 
     private DatabaseReference df;
 
@@ -71,6 +71,7 @@ public class candidate extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         spinner = (Spinner) view.findViewById(R.id.spinner);
+        eventspinner = (Spinner) view.findViewById(R.id.eventspinner);
         imageView=view.findViewById(R.id.imgview);
         submitbtn=view.findViewById(R.id.submitbtn);
         imgbtn=view.findViewById((R.id.imgbtn));
@@ -175,6 +176,7 @@ public class candidate extends Fragment {
                                     cg=cgedit.getText().toString();
                                     propaganda=proedit.getText().toString();
                                     text = spinner.getSelectedItem().toString();
+                                    event=eventspinner.getSelectedItem().toString();
                                     userkey=df.push().getKey();
                                     HashMap<String,String> hashMap=new HashMap<>();
                                     hashMap.put("imgurl",String.valueOf(uri));
@@ -183,6 +185,7 @@ public class candidate extends Fragment {
                                     hashMap.put("department",text);
                                     hashMap.put("propaganda",propaganda);
                                     hashMap.put("key",userkey);
+                                    hashMap.put("event",event);
 
                                     df.push().setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override

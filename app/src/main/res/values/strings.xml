@@ -24,10 +24,16 @@
         <item>onne</item>
     </array>
     <array name="vote">
+        <item>Select Event</item>
         <item>MistCaptain</item>
         <item>Osmanyhallcaptain</item>
-
         <item>Info</item>
+    </array>
+    <array name="postforcc">
+        <item>Select post</item>
+        <item>President</item>
+        <item>Treasurer</item>
+        <item>Publication</item>
     </array>
 
 

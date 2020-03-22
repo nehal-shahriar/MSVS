@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,17 +48,19 @@ public class result extends Fragment {
     Spinner spinner2;
     //ArrayList<String> mUsername=new ArrayList<>();
     String text1;
+    EditText eventedit;
 
     private RecyclerView recyclerView;
     private ArrayList<DataSetFire> arrayList;
-    private FirebaseRecyclerOptions<DataSetFire> options;
+    //private FirebaseRecyclerOptions<DataSetFire> options;
+
     //private FirebaseRecyclerAdapter<DataSetFire,FirebaseViewHolder> adapter;
     private DatabaseReference df;
     Button refreshbtn;
 
     DatabaseReference df1;
 
-    ArrayList<DataSetFire> mUsername=new ArrayList<>();
+    ArrayList<String> mUsername=new ArrayList<>();
     FirebaseListAdapter adapter;
 
     public result() {
@@ -74,133 +78,91 @@ public class result extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        //df= FirebaseDatabase.getInstance().getReference("student");
-        //listview=view.findViewById(R.id.lstview);
+
 
         spinner2=view.findViewById(R.id.spinner2);
-        text1 = spinner2.getSelectedItem().toString();
-        df= FirebaseDatabase.getInstance().getReference(text1);
+
+
+
+
 
         listview=view.findViewById(R.id.listview);
-        FirebaseListOptions<DataSetFire> options=new FirebaseListOptions.Builder<DataSetFire>()
-                .setLayout(R.layout.rowforvote)
-                .setQuery(df,DataSetFire.class)
-                .build();
-        adapter=new FirebaseListAdapter(options) {
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            protected void populateView(@NonNull View v, @NonNull Object model, int position) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                text1 = (String)adapterView.getItemAtPosition(i);
+                mUsername.clear();
+                df= FirebaseDatabase.getInstance().getReference();
 
-                DataSetFire gl=(DataSetFire) model;
-                TextView name=v.findViewById(R.id.teamname);
-                TextView id=v.findViewById(R.id.teamid);
-                TextView vote=v.findViewById(R.id.teamvoteno);
-                //TextView time=v.findViewById(R.id.time);
-
-                name.setText(gl.getName().toString());
-                id.setText(gl.getId().toString());
-                vote.setText(gl.getVote().toString());
-                //time.setText(gl.getTime().toString());
-
-            }
-        };
-
-        listview.setAdapter(adapter);
-        //recyclerView=view.findViewById(R.id.recylceview);
-        //recyclerView.setHasFixedSize(true);
-        //recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        //refreshbtn=view.findViewById(R.id.refreshbtn);
-
-        //arrayList=new ArrayList<DataSetFire>();
-
-
-        //df= FirebaseDatabase.getInstance().getReference().child(text1);
-        //Query query=df.orderByChild("name").equalTo(text1);
-        /*df.keepSynced(true);
-        options=new FirebaseRecyclerOptions.Builder<DataSetFire>().setQuery(df,DataSetFire.class).build();
-
-        adapter=new FirebaseRecyclerAdapter<DataSetFire, FirebaseViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull FirebaseViewHolder firebaseViewHolder, int i, @NonNull final DataSetFire model) {
-
-
-                firebaseViewHolder.teamname.setText(model.getName());
-                firebaseViewHolder.teamid.setText(model.getId());
-                firebaseViewHolder.teamvoteno.setText(model.getVote());
-                arrayList.add(model);
-                /*firebaseViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                df.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onClick(View view) {
-                        Intent intent=new Intent(getActivity(),detailedprofile.class);
-                        intent.putExtra("name",model.getName());
-                        intent.putExtra("id",model.getId());
-                        intent.putExtra("dept",model.getDept());
-                        startActivity(intent);
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (!dataSnapshot.hasChild(text1)){
+                            final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,mUsername);
+                            String value="null";
+                            mUsername.add(value);
+                            arrayAdapter.notifyDataSetChanged();
+                            listview.setAdapter(arrayAdapter);
+                        }
+                        else{
+                            df1=FirebaseDatabase.getInstance().getReference().child(text1);
+                            final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,mUsername);
+
+                            df1.addChildEventListener(new ChildEventListener() {
+                                @Override
+                                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                                    for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+
+                                            String value=(String)dataSnapshot1.getKey()+": "+(String)dataSnapshot1.getValue();
+                                            mUsername.add(value);
+
+
+
+                                    }
+                                    arrayAdapter.notifyDataSetChanged();
+                                    listview.setAdapter(arrayAdapter);
+                                }
+
+                                @Override
+                                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                                }
+
+                                @Override
+                                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                                }
+
+                                @Override
+                                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
                     }
                 });
 
             }
 
-            @NonNull
             @Override
-            public FirebaseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-                return new FirebaseViewHolder(LayoutInflater.from(getActivity()).inflate(R.layout.rowforvote,viewGroup,false));
-            }
-        };
-
-        adapter.notifyDataSetChanged();
-        recyclerView.setAdapter(adapter);
-        final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,mUsername);
-        listview.setAdapter(arrayAdapter);
-        text = spinner2.getSelectedItem().toString();
-        df.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
-                    String value=(String)dataSnapshot1.getValue();
-                    mUsername.add(value);
-
-                }
-                arrayAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
-
-
-    }
+        });
 
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
 
-        adapter.startListening();
-
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        adapter.stopListening();
     }
 
 }

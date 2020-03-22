@@ -9,12 +9,12 @@ public class DataSetFire {
     String vote;
     String email;
     String barcodeid;
-    String position,feed;
+
 
     public DataSetFire() {
     }
 
-    public DataSetFire(String name, String id, String dept, String cg, String department, String vote, String email, String barcodeid, String position,String feed) {
+    public DataSetFire(String name, String id, String dept, String cg, String department, String vote, String email, String barcodeid) {
         this.name = name;
         this.id = id;
         this.dept = dept;
@@ -23,8 +23,7 @@ public class DataSetFire {
         this.vote = vote;
         this.email = email;
         this.barcodeid = barcodeid;
-        this.position = position;
-        this.feed=feed;
+
     }
 
     public String getName() {
@@ -91,19 +90,7 @@ public class DataSetFire {
         this.barcodeid = barcodeid;
     }
 
-    public String getPosition() {
-        return position;
-    }
 
-    public void setPosition(String position) {
-        this.position = position;
-    }
 
-    public String getFeed() {
-        return feed;
-    }
 
-    public void setFeed(String feed) {
-        this.feed = feed;
-    }
 }

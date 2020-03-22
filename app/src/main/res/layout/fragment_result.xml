@@ -14,21 +14,21 @@
 
         <Spinner
             android:id="@+id/spinner2"
-            android:layout_width="192dp"
-            android:layout_height="51dp"
+            android:layout_width="263dp"
+            android:layout_height="47dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="#A8A0A0"
             android:entries="@array/vote"
-            android:gravity="center"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.18" />
+            app:layout_constraintVertical_bias="0.178" />
 
 
         <ListView

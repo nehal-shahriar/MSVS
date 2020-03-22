@@ -27,11 +27,10 @@ public class Profile_of_user extends AppCompatActivity {
     TextView pronametxt, prodepttext, proidtxt;
     ImageView proimgview;
     DatabaseReference df;
-    FirebaseDatabase fr;
     EditText searchedit;
-    Button probtn;
+    //Button probtn;
     String barcoderesult;
-    FloatingActionButton floatingbtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +42,9 @@ public class Profile_of_user extends AppCompatActivity {
         proidtxt = findViewById(R.id.proidtxt);
         proimgview = findViewById(R.id.proimgview);
         searchedit = findViewById(R.id.searchedit);
-        probtn = findViewById(R.id.probtn);
+        //probtn = findViewById(R.id.probtn);
 
-        floatingbtn=findViewById(R.id.floatingbtn);
+
 
         //pronametxt.setText(st.getName());
         //proidtxt.setText(st.getId());
