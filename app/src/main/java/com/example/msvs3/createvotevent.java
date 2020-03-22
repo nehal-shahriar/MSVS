@@ -3,6 +3,7 @@ package com.example.msvs3;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -62,6 +63,13 @@ public class createvotevent extends Fragment {
         endtimetxt=view.findViewById(R.id.endtimetxt);
         df= FirebaseDatabase.getInstance().getReference().child("vote_events");
         addcanbtn=view.findViewById(R.id.addcanbtn);
+        addcanbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(),addcandidate.class);
+                startActivity(intent);
+            }
+        });
         calenderbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -9,7 +9,7 @@
 
     <ImageView
         android:layout_marginLeft="120dp"
-        android:id="@+id/imageView"
+        android:id="@+id/candidateimageView"
         android:layout_width="181dp"
         android:layout_height="177dp"
 
@@ -18,25 +18,31 @@
 
     <TextView
         android:layout_marginTop="50dp"
-        android:id="@+id/candidatenametxt"
+        android:id="@+id/appcandidatenametxt"
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:text=""
         android:textSize="24sp"/>
 
     <TextView
-        android:id="@+id/candidateidtxt"
+        android:id="@+id/appcandidatecgtxt"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:text=""
         android:textSize="24sp"/>
 
     <TextView
-        android:id="@+id/candidatedepttxt"
+        android:id="@+id/appcandidatedepttxt"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text=""
         android:textSize="24sp"/>
 
+    <TextView
+        android:id="@+id/appcandidateprotxt"
+        android:layout_width="match_parent"
+        android:layout_height="99dp"
+        android:text=""
+        android:textSize="24sp" />
 
 </LinearLayout>

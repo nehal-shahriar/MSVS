@@ -8,13 +8,13 @@ public class DataSetFire {
     String department;
     String vote;
     String email;
-    String barcodeid;
+    String barcodeid,propaganda,imgurl;
 
 
     public DataSetFire() {
     }
 
-    public DataSetFire(String name, String id, String dept, String cg, String department, String vote, String email, String barcodeid) {
+    public DataSetFire(String name, String id, String dept, String cg, String department, String vote, String email, String barcodeid,String propaganda,String imgurl) {
         this.name = name;
         this.id = id;
         this.dept = dept;
@@ -23,6 +23,8 @@ public class DataSetFire {
         this.vote = vote;
         this.email = email;
         this.barcodeid = barcodeid;
+        this.propaganda=propaganda;
+        this.imgurl=imgurl;
 
     }
 
@@ -91,6 +93,19 @@ public class DataSetFire {
     }
 
 
+    public String getPropaganda() {
+        return propaganda;
+    }
 
+    public void setPropaganda(String propaganda) {
+        this.propaganda = propaganda;
+    }
 
+    public String getImgurl() {
+        return imgurl;
+    }
+
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
+    }
 }
