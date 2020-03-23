@@ -12,7 +12,7 @@ public class FirebaseViewHolder extends RecyclerView.ViewHolder {
     public TextView teamone,teamtwo,teamthree;
     public TextView teamname,teamid,teamvoteno;
     public ImageView candidateimg;
-    public Button deletebtn;
+    public Button deletebtn,deletecandbtn;
     public TextView teamname1,teamcg,teamdept;
     public FirebaseViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -26,6 +26,7 @@ public class FirebaseViewHolder extends RecyclerView.ViewHolder {
         teamcg=itemView.findViewById(R.id.teamcg);
         teamdept=itemView.findViewById(R.id.teamdept);
         deletebtn=itemView.findViewById(R.id.deletebtn);
+        deletecandbtn=itemView.findViewById(R.id.deletecandbtn);
         //candidateimg=itemView.findViewById(R.id.candidateimg);
 
     }

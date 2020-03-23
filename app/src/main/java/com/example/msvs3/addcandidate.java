@@ -54,10 +54,17 @@ public class addcandidate extends AppCompatActivity {
 
         adapter=new FirebaseRecyclerAdapter<DataSetFire, FirebaseViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull FirebaseViewHolder firebaseViewHolder, int i, @NonNull final DataSetFire model) {
+            protected void onBindViewHolder(@NonNull FirebaseViewHolder firebaseViewHolder, final int i, @NonNull final DataSetFire model) {
                 firebaseViewHolder.teamname1.setText(model.getName());
                 firebaseViewHolder.teamcg.setText(model.getCg());
                 firebaseViewHolder.teamdept.setText(model.getDepartment());
+                firebaseViewHolder.deletecandbtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("student").child(getRef(i).getKey());
+                        databaseReference.removeValue();
+                    }
+                });
                 firebaseViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
