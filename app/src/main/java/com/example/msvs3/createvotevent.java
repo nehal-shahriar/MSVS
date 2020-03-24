@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 
 /**
@@ -35,8 +37,9 @@ public class createvotevent extends Fragment {
     TimePickerDialog tf,tf1;
     String format;
     Button calenderbtn,strttimebtn,endtimebtn,addcanbtn,voterlistbtn,createbtn;
-
+    Spinner event, post;
     TextView datetxt,strttimetxt,endtimetxt;
+    String date,start,end,events,posts;
     private DatabaseReference df;
 
     public createvotevent() {
@@ -57,11 +60,13 @@ public class createvotevent extends Fragment {
         calenderbtn=view.findViewById(R.id.calenderbtn);
         strttimebtn=view.findViewById(R.id.starttimebtn);
         endtimebtn=view.findViewById(R.id.endtimebtn);
-
+        createbtn=view.findViewById(R.id.createbtn);
+        event=view.findViewById(R.id.event);
+        post=view.findViewById(R.id.post);
         datetxt=view.findViewById(R.id.datetxt);
         strttimetxt=view.findViewById(R.id.starttimetxt);
         endtimetxt=view.findViewById(R.id.endtimetxt);
-        df= FirebaseDatabase.getInstance().getReference().child("vote_events");
+        df= FirebaseDatabase.getInstance().getReference().child("Vote_events");
         addcanbtn=view.findViewById(R.id.addcanbtn);
         addcanbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +134,23 @@ public class createvotevent extends Fragment {
             }
         });
 
+        createbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                date=datetxt.getText().toString().trim();
+                start=strttimetxt.getText().toString().trim();
+                end=endtimetxt.getText().toString().trim();
+                events=event.getSelectedItem().toString();
+                posts=post.getSelectedItem().toString();
+                String key =df.push().getKey();
+                HashMap<String ,String> hash=new HashMap<>();
+                hash.put("date",date);
+                hash.put("start",start);
+                hash.put("end",end);
+                hash.put("key",key);
+                df.child(events).child(posts).child(key).setValue(hash);
+            }
+        });
 
     }
     public void selectedtimeformat(int hour){

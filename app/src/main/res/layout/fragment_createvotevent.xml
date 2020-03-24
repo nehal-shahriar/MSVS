@@ -79,7 +79,7 @@
             app:layout_constraintHorizontal_bias="0.507"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.755" />
+            app:layout_constraintVertical_bias="0.832" />
 
         <Button
             android:id="@+id/createbtn"
@@ -93,7 +93,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.878" />
+            app:layout_constraintVertical_bias="0.951" />
 
         <Button
             android:id="@+id/addcanbtn"
@@ -105,10 +105,9 @@
             android:text="Add candidates"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.514"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.657" />
+            app:layout_constraintVertical_bias="0.74" />
 
         <TextView
             android:id="@+id/endtimetxt"
@@ -168,7 +167,7 @@
             app:layout_constraintVertical_bias="0.164" />
 
         <Spinner
-            android:id="@+id/spinner4"
+            android:id="@+id/event"
             android:layout_width="195dp"
             android:layout_height="38dp"
             android:layout_marginStart="8dp"
@@ -184,6 +183,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.556" />
+
+        <Spinner
+            android:id="@+id/post"
+            android:layout_width="207dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#DED0D0"
+            android:entries="@array/post"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.542"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.639" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

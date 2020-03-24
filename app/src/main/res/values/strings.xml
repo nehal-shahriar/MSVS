@@ -35,7 +35,13 @@
         <item>Treasurer</item>
         <item>Publication</item>
     </array>
-
+    <array name="post">
+        <item>Select post</item>
+        <item>captain</item>
+        <item>departmentcaptain</item>
+        <item>culturalcaptain</item>
+        <item>sportscaptain</item>
+    </array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
