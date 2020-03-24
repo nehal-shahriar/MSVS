@@ -187,7 +187,7 @@ public class candidate extends Fragment {
                                     hashMap.put("key",userkey);
                                     hashMap.put("event",event);
 
-                                    df.push().setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    df.child(userkey).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             Toast.makeText(getActivity(),"Your request is sent to Admin for approval",Toast.LENGTH_SHORT).show();
