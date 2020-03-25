@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,14 +18,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
 
 public class approve extends AppCompatActivity {
-    TextView usernametxt,useridtxt,userdepttxt,useremailtxt,userbarcodeidtxt;
+    TextView usernametxt,useridtxt,userdepttxt,useremailtxt,userbarcodeidtxt,phonetxt,leveltxt,cgtxtview;
     Button approvebtn;
     private DatabaseReference df;
     private DatabaseReference df1;
-    String teama,teamb,teamc,teame,teamd,teamf;
-    int i=0;
+    String teama,teamb,teamc,teame,teamd,teamf,teamg,teamh,teami,teamj;
+    ImageView profileimg;
+    int flag=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +38,10 @@ public class approve extends AppCompatActivity {
         useridtxt=findViewById(R.id.idtxtview);
         userdepttxt=findViewById(R.id.depttxtview);
         useremailtxt=findViewById(R.id.emailtxtview);
+        phonetxt=findViewById(R.id.phonetxt);
+        leveltxt=findViewById(R.id.leveltxt);
+        cgtxtview=findViewById(R.id.cgviewtxt);
+        profileimg=findViewById(R.id.profileimg);
         userbarcodeidtxt=findViewById(R.id.barcodeidtxtview);
         approvebtn=findViewById(R.id.approvebtn);
         teama=getIntent().getStringExtra("name");
@@ -40,8 +49,12 @@ public class approve extends AppCompatActivity {
         teamc=getIntent().getStringExtra("dept");
         teamd=getIntent().getStringExtra("email");
         teame=getIntent().getStringExtra("barcodeid");
-        teamf=getIntent().getStringExtra("position");
-        i=Integer.parseInt(teamf);
+        teamf=getIntent().getStringExtra("level");
+        teamg=getIntent().getStringExtra("imgurl");
+        teamh=getIntent().getStringExtra("phone");
+        teami=getIntent().getStringExtra("cg");
+        teamj=getIntent().getStringExtra("key");
+
         //Log.i("OUR VALUE",teamone);
         //Log.i("OUR VALUE 2",teamtwo);
         //Log.i("OUR VALUE 3",teamthree);
@@ -51,24 +64,64 @@ public class approve extends AppCompatActivity {
         userdepttxt.setText(teamc);
         useremailtxt.setText(teamd);
         userbarcodeidtxt.setText(teame);
+        phonetxt.setText(teamh);
+        leveltxt.setText(teamf);
+        cgtxtview.setText(teami);
+        Picasso.get().load(teamg).into(profileimg);
         approvebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 df= FirebaseDatabase.getInstance().getReference().child("Approveduser");
-                Voter voter=new Voter();
+                /*Voter voter=new Voter();
                 voter.setName(teama);
                 voter.setId(teamb);
                 voter.setDept(teamc);
                 voter.setEmail(teamd);
-                voter.setBarcodeid(teame);
-                df.push().setValue(voter);
-                Toast.makeText(approve.this,"voter is approved",Toast.LENGTH_SHORT).show();
-                //df1=FirebaseDatabase.getInstance().getReference().child("feedback");
+                voter.setBarcodeid(teame);*/
 
-                String Subject="Approval from Admin";
-                String feed="You are approved by Admin as a Voter. Congratulations!";
-                JavaMailAPI javaMailAPI= new JavaMailAPI(approve.this,teamd,Subject,feed);
-                javaMailAPI.execute();
+                final HashMap<String,String> hashMap=new HashMap<>();
+                hashMap.put("name",teama);
+                hashMap.put("id",teamb);
+                hashMap.put("barcodeid",teame);
+                hashMap.put("cg",teami);
+                hashMap.put("level",teamf);
+                hashMap.put("dept",teamc);
+                hashMap.put("email",teamd);
+                hashMap.put("phone",teamh);
+                hashMap.put("key",teamj);
+                hashMap.put("imgurl",teamg);
+                Query query=df.orderByChild("barcodeid").equalTo(teame);
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        if(dataSnapshot.hasChildren()){
+                            flag=1;
+                            break;
+                        }
+                        }
+                        if(flag==0){
+                            df.child(teamj).setValue(hashMap);
+
+                            Toast.makeText(approve.this,"voter is approved",Toast.LENGTH_SHORT).show();
+                            //df1=FirebaseDatabase.getInstance().getReference().child("feedback");
+
+                            String Subject="Approval from Admin";
+                            String feed="You are approved by Admin as a Voter. Congratulations!";
+                            JavaMailAPI javaMailAPI= new JavaMailAPI(approve.this,teamd,Subject,feed);
+                            javaMailAPI.execute();
+                        }
+                        else {
+                            Toast.makeText(approve.this,"voter is already approved!!",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
 
 
 

@@ -30,6 +30,7 @@ public class admin extends AppCompatActivity {
         viewPagerAdapter.addFragment(new edituser(),"");
         viewPagerAdapter.addFragment(new history(),"");
         viewPagerAdapter.addFragment(new Requestlist(),"");
+        viewPagerAdapter.addFragment(new addcandidatebyadmin(),"");
 
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -41,6 +42,7 @@ public class admin extends AppCompatActivity {
         tabLayout.getTabAt(1).setText("Edit user");
         tabLayout.getTabAt(2).setText("history");
         tabLayout.getTabAt(3).setText("Request");
+        tabLayout.getTabAt(4).setText("Add Candidates");
 
 
     }

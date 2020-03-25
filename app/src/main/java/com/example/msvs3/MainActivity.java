@@ -25,7 +25,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class MainActivity extends AppCompatActivity {
     Button userbtn,adminbtn,signbtn,fdbtn;
-    Button regbtn;
+    //Button regbtn;
     private ZXingScannerView scannerView;
     DatabaseReference dref;
     private static String barcodeID;
@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
         userbtn=findViewById(R.id.userbtn);
         signbtn=findViewById(R.id.signinbtn);
-        regbtn=findViewById(R.id.regbtn);
+        //regbtn=findViewById(R.id.regbtn);
         adminbtn=findViewById((R.id.adminbtn));
-        //fdbtn=findViewById(R.id.fdbtn);
+        fdbtn=findViewById(R.id.fdbtn);
         userbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,10 +57,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        regbtn.setOnClickListener(new View.OnClickListener() {
+        fdbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,registration.class);
+                Intent intent=new Intent(MainActivity.this,RegPage.class);
+                startActivity(intent);
+            }
+        });
+        fdbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,RegPage.class);
                 startActivity(intent);
             }
         });
@@ -142,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 // Do nothing
                                 dialog.dismiss();
-                                Intent intent=new Intent(MainActivity.this,registration.class);
+                                Intent intent=new Intent(MainActivity.this,RegPage.class);
                                 startActivity(intent);
 
 

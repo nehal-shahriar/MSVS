@@ -36,10 +36,8 @@
             android:layout_width="111dp"
             android:layout_height="31dp"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:text="Name:"
             android:textColor="#FCFCFC"
@@ -48,20 +46,18 @@
             android:textStyle="bold|italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.126"
+            app:layout_constraintHorizontal_bias="0.123"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.342" />
+            app:layout_constraintVertical_bias="0.331" />
 
         <EditText
             android:id="@+id/nameedit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:ems="10"
             android:gravity="center_horizontal"
@@ -74,19 +70,36 @@
             app:layout_constraintHorizontal_bias="0.956"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.338" />
+            app:layout_constraintVertical_bias="0.328" />
 
         <TextView
             android:id="@+id/cgtxt"
             android:layout_width="80dp"
             android:layout_height="29dp"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:text="CGPA:"
+            android:textColor="#FCFCFC"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.114"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.386" />
+
+        <TextView
+            android:id="@+id/IDtxt"
+            android:layout_width="80dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="ID:"
             android:textColor="#FCFCFC"
             android:textSize="20sp"
             android:textStyle="bold|italic"
@@ -136,6 +149,25 @@
             app:layout_constraintVertical_bias="0.604" />
 
         <TextView
+            android:id="@+id/posttxt"
+            android:layout_width="131dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Event"
+            android:textColor="#F5F5F5"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.136"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.679" />
+
+        <TextView
             android:id="@+id/deptbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -161,10 +193,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:ems="10"
             android:gravity="center_horizontal"
@@ -177,7 +207,28 @@
             app:layout_constraintHorizontal_bias="0.956"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.446" />
+            app:layout_constraintVertical_bias="0.391" />
+
+        <EditText
+            android:id="@+id/idedit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:hint="Enter your ID"
+            android:inputType="textPersonName"
+            android:textColor="#F5F5F5"
+            android:textColorHint="#F5F5F5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.956"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.458" />
 
         <Spinner
             android:id="@+id/spinner"
@@ -216,6 +267,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.606" />
+
+        <Spinner
+            android:id="@+id/postspinner"
+            android:layout_width="197dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/white"
+            android:entries="@array/post"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.959"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.681" />
 
         <Button
             android:id="@+id/imgbtn"

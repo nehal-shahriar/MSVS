@@ -59,10 +59,10 @@ public class registration extends AppCompatActivity {
         nameedit1=findViewById(R.id.nameedit1);
         idedit=findViewById(R.id.idedit);
         emailedit=findViewById(R.id.emailedit);
-        //img=findViewById(R.id.img);
-        //addimgbtn=findViewById(R.id.addimgbtn);
+        img=findViewById(R.id.regimg);
+        addimgbtn=findViewById(R.id.regimgbtn);
         folder= FirebaseStorage.getInstance().getReference().child("Imagefolder");
-        /*addimgbtn.setOnClickListener(new View.OnClickListener() {
+        addimgbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -72,15 +72,15 @@ public class registration extends AppCompatActivity {
                     //requestPermissions(permissions,permission_code);
                     //}
                     //else {
-                    PickImageFromGallery();
+                    PickImageGallery();
                 } else {
-                    PickImageFromGallery();
+                    PickImageGallery();
                 }
             }
-        });*/
+        });
     }
 
-    private void PickImageFromGallery() {
+    public void PickImageGallery() {
         Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent,image_pick_code);
@@ -92,7 +92,7 @@ public class registration extends AppCompatActivity {
             case permission_code:{
                 if(grantResults.length>0 && grantResults[0]==
                         PackageManager.PERMISSION_GRANTED){
-                    PickImageFromGallery();
+                    PickImageGallery();
                 }
                 else{
                     Toast.makeText(this,"permission denied",Toast.LENGTH_SHORT).show();

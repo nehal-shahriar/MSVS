@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -26,15 +25,14 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Requestlist extends Fragment {
-
+public class addcandidatebyadmin extends Fragment {
     View view;
     private RecyclerView recyclerView;
     private ArrayList<DataSetFire> arrayList;
     private FirebaseRecyclerOptions<DataSetFire> options;
     private FirebaseRecyclerAdapter<DataSetFire,FirebaseViewHolder> adapter;
     private DatabaseReference df;
-    public Requestlist() {
+    public addcandidatebyadmin() {
         // Required empty public constructor
     }
 
@@ -43,63 +41,63 @@ public class Requestlist extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.fragment_requestlist, container, false);
+        view= inflater.inflate(R.layout.fragment_addcandidatebyadmin, container, false);
         return view;
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        recyclerView=view.findViewById(R.id.recylceview1);
+
+        recyclerView=view.findViewById(R.id.recylceview4);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        //refreshbtn=view.findViewById(R.id.refreshbtn);
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         arrayList=new ArrayList<DataSetFire>();
-
-
-        df= FirebaseDatabase.getInstance().getReference().child("RequestedUser");
-        //Query query=df.orderByChild("name").equalTo(text1);
+        df= FirebaseDatabase.getInstance().getReference().child("student");
         df.keepSynced(true);
         options=new FirebaseRecyclerOptions.Builder<DataSetFire>().setQuery(df,DataSetFire.class).build();
+
         adapter=new FirebaseRecyclerAdapter<DataSetFire, FirebaseViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull FirebaseViewHolder firebaseViewHolder,final int i, @NonNull final DataSetFire dataSetFire) {
-                firebaseViewHolder.teamone.setText(dataSetFire.getName());
-                firebaseViewHolder.teamtwo.setText(dataSetFire.getId());
-                firebaseViewHolder.teamthree.setText(dataSetFire.getDept());
-                firebaseViewHolder.deletebtn.setOnClickListener(new View.OnClickListener() {
+            protected void onBindViewHolder(@NonNull FirebaseViewHolder firebaseViewHolder, final int i, @NonNull final DataSetFire model) {
+                firebaseViewHolder.teamname1.setText(model.getName());
+                firebaseViewHolder.teamcg.setText(model.getCg());
+                firebaseViewHolder.teamdept.setText(model.getDepartment());
+                firebaseViewHolder.deletecandbtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("RequestedUser").child(getRef(i).getKey());
+                        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("student").child(getRef(i).getKey());
                         databaseReference.removeValue();
                     }
                 });
                 firebaseViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(getActivity(),approve.class);
-                        intent.putExtra("name",dataSetFire.getName());
-                        intent.putExtra("id",dataSetFire.getId());
-                        intent.putExtra("dept",dataSetFire.getDept());
-                        intent.putExtra("email",dataSetFire.getEmail());
-                        intent.putExtra("barcodeid",dataSetFire.getBarcodeid());
-                        intent.putExtra("imgurl",dataSetFire.getImgurl());
-                        intent.putExtra("phone",dataSetFire.getPhone());
-                        intent.putExtra("level",dataSetFire.getLevel());
-                        intent.putExtra("cg",dataSetFire.getCg());
-                        intent.putExtra("key",dataSetFire.getKey());
+                        Intent intent=new Intent(getActivity(),approvecandidate.class);
+                        intent.putExtra("name",model.getName());
+                        intent.putExtra("cg",model.getCg());
+                        intent.putExtra("id",model.getId());
+                        intent.putExtra("department",model.getDepartment());
+                        intent.putExtra("propaganda",model.getPropaganda());
+                        intent.putExtra("imgurl",model.getImgurl());
+                        intent.putExtra("event",model.getEvent());
+                        intent.putExtra("post",model.getPost());
                         startActivity(intent);
                     }
                 });
             }
 
+
+
             @NonNull
             @Override
-            public FirebaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return new FirebaseViewHolder(LayoutInflater.from(getActivity()).inflate(R.layout.row,parent,false));
+            public FirebaseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+
+                return new FirebaseViewHolder(LayoutInflater.from(getActivity()).inflate(R.layout.rowforcandidate,viewGroup,false));
             }
         };
-        //adapter.notifyDataSetChanged();
+
         recyclerView.setAdapter(adapter);
+
     }
     @Override
     public void onStart() {
@@ -114,5 +112,5 @@ public class Requestlist extends Fragment {
         super.onStop();
         adapter.stopListening();
     }
-
 }
+

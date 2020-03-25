@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".approvecandidate"></activity>
+        <activity android:name=".RegPage"></activity>
+        <activity android:name=".approvecandidate" />
         <activity android:name=".addcandidate" />
         <activity android:name=".feedback" />
         <activity android:name=".approve" />

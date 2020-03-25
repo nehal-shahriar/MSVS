@@ -27,12 +27,17 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
@@ -43,17 +48,18 @@ import static android.app.Activity.RESULT_OK;
  */
 public class candidate extends Fragment {
     View view;
-    Spinner spinner,eventspinner;
+    Spinner spinner,eventspinner,postspinner;
     ImageView imageView;
     Button imgbtn,submitbtn;
-    EditText nameedit,cgedit,proedit;
+    EditText nameedit,cgedit,proedit,idedit;
     private StorageReference folder;
     private static final int image_pick_code=1000;
     private static final int permission_code=1001;
 
-    String name, cg, propaganda,text,userkey,event;
+    String name, cg,id, propaganda,text,userkey,event,post,stid;
 
     private DatabaseReference df;
+    private DatabaseReference df1;
 
     public candidate() {
         // Required empty public constructor
@@ -63,7 +69,7 @@ public class candidate extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_candidate, container, false);
         return view;
@@ -72,14 +78,53 @@ public class candidate extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         spinner = (Spinner) view.findViewById(R.id.spinner);
         eventspinner = (Spinner) view.findViewById(R.id.eventspinner);
+        postspinner = (Spinner) view.findViewById(R.id.postspinner);
         imageView=view.findViewById(R.id.imgview);
         submitbtn=view.findViewById(R.id.submitbtn);
         imgbtn=view.findViewById((R.id.imgbtn));
         nameedit=view.findViewById(R.id.nameedit);
         cgedit=view.findViewById(R.id.cgedit);
+        idedit=view.findViewById(R.id.idedit);
         proedit=view.findViewById(R.id.proedit);
-        df=FirebaseDatabase.getInstance().getReference().child("student");
+        df1=FirebaseDatabase.getInstance().getReference().child("student");
         folder= FirebaseStorage.getInstance().getReference().child("Imagefolder");
+        try {
+            Class<?> cls=Class.forName("com.example.msvs3.Profile_of_user");
+            Field field=cls.getDeclaredField("studentid");
+            field.setAccessible(true);
+            Object object=field.get(new Profile_of_user());
+            stid=(String)object;
+        } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        df = FirebaseDatabase.getInstance().getReference().child("Approveduser");
+        Query query = df.orderByChild("id").equalTo(stid);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String a = "" + ds.child("name").getValue(String.class);
+                    String b = "" + ds.child("id").getValue(String.class);
+                    String c = "" + ds.child("dept").getValue(String.class);
+                    nameedit.setText(a);
+                    cgedit.setText(c);
+                    idedit.setText(b);
+
+                    //Picasso.get().load(String.valueOf(ds.child("imgurl").getValue())).into(proimgview);
+                    //try {
+                    //} catch (Exception e) {
+                    //  Picasso.get().load(R.drawable.mist).into(proimgview);
+                    //}
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
 
 
@@ -174,20 +219,24 @@ public class candidate extends Fragment {
                                     //DatabaseReference imgstore= FirebaseDatabase.getInstance().getReference().child("test");
                                     name=nameedit.getText().toString();
                                     cg=cgedit.getText().toString();
+                                    id=idedit.getText().toString();
                                     propaganda=proedit.getText().toString();
                                     text = spinner.getSelectedItem().toString();
                                     event=eventspinner.getSelectedItem().toString();
+                                    post=postspinner.getSelectedItem().toString();
                                     userkey=df.push().getKey();
                                     HashMap<String,String> hashMap=new HashMap<>();
                                     hashMap.put("imgurl",String.valueOf(uri));
                                     hashMap.put("name",name);
+                                    hashMap.put("id",id);
                                     hashMap.put("cg",cg);
                                     hashMap.put("department",text);
                                     hashMap.put("propaganda",propaganda);
                                     hashMap.put("key",userkey);
                                     hashMap.put("event",event);
+                                    hashMap.put("post",post);
 
-                                    df.child(userkey).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    df1.child(userkey).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             Toast.makeText(getActivity(),"Your request is sent to Admin for approval",Toast.LENGTH_SHORT).show();

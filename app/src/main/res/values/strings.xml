@@ -12,16 +12,15 @@
     <array name="voteevent">
         <item>Select Voting Event</item>
         <item>Mist captain</item>
-        <item>Department captain</item>
-        <item>Cultural captain</item>
-        <item>Osmany hall captain</item>
+        <item>CSE Department</item>
+        <item>Osmanyhall captain</item>
     </array>
-    <array name="namesofvoters">
-        <item>Select name</item>
-        <item>Rownok</item>
-        <item>prithula</item>
-        <item>Rifat</item>
-        <item>onne</item>
+    <array name="Level">
+        <item>Select Level</item>
+        <item>"1"</item>
+        <item>"2"</item>
+        <item>"3"</item>
+        <item>"4"</item>
     </array>
     <array name="vote">
         <item>Select Event</item>

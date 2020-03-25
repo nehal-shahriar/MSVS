@@ -8,17 +8,19 @@ public class student {
      String dept;
      String email;
      String barcodeid;
+     String key;
 
     public student() {
 
     }
 
-    public student(String name, String id, String dept, String email, String barcodeid) {
+    public student(String name, String id, String dept, String email, String barcodeid,String key) {
         this.name = name;
         this.id = id;
         this.dept = dept;
         this.email = email;
         this.barcodeid = barcodeid;
+        this.key=key;
     }
 
     public String getName() {
@@ -59,5 +61,13 @@ public class student {
 
     public void setBarcodeid(String barcodeid) {
         this.barcodeid = barcodeid;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

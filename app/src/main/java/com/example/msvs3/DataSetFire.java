@@ -8,13 +8,13 @@ public class DataSetFire {
     String department;
     String vote;
     String email;
-    String barcodeid,propaganda,imgurl;
+    String barcodeid,propaganda,imgurl,event,post,key,phone,level;
 
 
     public DataSetFire() {
     }
 
-    public DataSetFire(String name, String id, String dept, String cg, String department, String vote, String email, String barcodeid,String propaganda,String imgurl) {
+    public DataSetFire(String name, String id, String dept, String cg, String department, String vote, String email, String barcodeid,String propaganda,String imgurl,String event,String post,String key,String phone,String level) {
         this.name = name;
         this.id = id;
         this.dept = dept;
@@ -25,6 +25,11 @@ public class DataSetFire {
         this.barcodeid = barcodeid;
         this.propaganda=propaganda;
         this.imgurl=imgurl;
+        this.event=event;
+        this.post=post;
+        this.key=key;
+        this.phone=phone;
+        this.level=level;
 
     }
 
@@ -107,5 +112,45 @@ public class DataSetFire {
 
     public void setImgurl(String imgurl) {
         this.imgurl = imgurl;
+    }
+
+    public String getEvent() {
+        return event;
+    }
+
+    public void setEvent(String event) {
+        this.event = event;
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
+        this.post = post;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 }

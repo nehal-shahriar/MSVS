@@ -30,6 +30,7 @@ public class Profile_of_user extends AppCompatActivity {
     EditText searchedit;
     //Button probtn;
     String barcoderesult;
+    private static String studentid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +67,13 @@ public class Profile_of_user extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     String a = "" + ds.child("name").getValue(String.class);
-                    String b = "" + ds.child("id").getValue(String.class);
+                    studentid = "" + ds.child("id").getValue(String.class);
                     String c = "" + ds.child("dept").getValue(String.class);
+                    String d=ds.child("imgurl").getValue(String.class);
                     pronametxt.setText(a);
                     prodepttext.setText(c);
-                    proidtxt.setText(b);
+                    proidtxt.setText(studentid);
+                    Picasso.get().load(d).into(proimgview);
 
                     //Picasso.get().load(String.valueOf(ds.child("imgurl").getValue())).into(proimgview);
                     //try {
