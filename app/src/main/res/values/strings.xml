@@ -11,9 +11,9 @@
     </array>
     <array name="voteevent">
         <item>Select Voting Event</item>
-        <item>Mist captain</item>
-        <item>CSE Department</item>
-        <item>Osmanyhall captain</item>
+        <item>mistcaptain</item>
+        <item>csedepartment</item>
+        <item>osmanyhallcaptain</item>
     </array>
     <array name="Level">
         <item>Select Level</item>
@@ -26,6 +26,7 @@
         <item>Select Event</item>
         <item>MistCaptain</item>
         <item>Osmanyhallcaptain</item>
+        <item>CseDepartment</item>
         <item>Info</item>
     </array>
     <array name="postforcc">

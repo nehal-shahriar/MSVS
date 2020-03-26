@@ -36,6 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -48,7 +49,7 @@ import static android.app.Activity.RESULT_OK;
  */
 public class candidate extends Fragment {
     View view;
-    Spinner spinner,eventspinner,postspinner;
+    Spinner spinner,eventspinner,postspinner,lvlspin;
     ImageView imageView;
     Button imgbtn,submitbtn;
     EditText nameedit,cgedit,proedit,idedit;
@@ -56,7 +57,8 @@ public class candidate extends Fragment {
     private static final int image_pick_code=1000;
     private static final int permission_code=1001;
 
-    String name, cg,id, propaganda,text,userkey,event,post,stid;
+
+    String name, cg,id, propaganda,text,userkey,event,post,stid,lvl;
 
     private DatabaseReference df;
     private DatabaseReference df1;
@@ -79,6 +81,7 @@ public class candidate extends Fragment {
         spinner = (Spinner) view.findViewById(R.id.spinner);
         eventspinner = (Spinner) view.findViewById(R.id.eventspinner);
         postspinner = (Spinner) view.findViewById(R.id.postspinner);
+        lvlspin=view.findViewById(R.id.lvlspin);
         imageView=view.findViewById(R.id.imgview);
         submitbtn=view.findViewById(R.id.submitbtn);
         imgbtn=view.findViewById((R.id.imgbtn));
@@ -105,11 +108,13 @@ public class candidate extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     String a = "" + ds.child("name").getValue(String.class);
-                    String b = "" + ds.child("id").getValue(String.class);
-                    String c = "" + ds.child("dept").getValue(String.class);
+                    String b = "" + ds.child("cg").getValue(String.class);
+                    String c = "" + ds.child("id").getValue(String.class);
+                    String d="" + ds.child("imgurl").getValue(String.class);
                     nameedit.setText(a);
-                    cgedit.setText(c);
-                    idedit.setText(b);
+                    cgedit.setText(b);
+                    idedit.setText(c);
+                    Picasso.get().load(d).into(imageView);
 
                     //Picasso.get().load(String.valueOf(ds.child("imgurl").getValue())).into(proimgview);
                     //try {
@@ -186,6 +191,7 @@ public class candidate extends Fragment {
         startActivityForResult(intent,image_pick_code);
     }
 
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch(requestCode){
@@ -215,33 +221,63 @@ public class candidate extends Fragment {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             imagename.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
-                                public void onSuccess(Uri uri) {
-                                    //DatabaseReference imgstore= FirebaseDatabase.getInstance().getReference().child("test");
-                                    name=nameedit.getText().toString();
-                                    cg=cgedit.getText().toString();
-                                    id=idedit.getText().toString();
-                                    propaganda=proedit.getText().toString();
-                                    text = spinner.getSelectedItem().toString();
-                                    event=eventspinner.getSelectedItem().toString();
-                                    post=postspinner.getSelectedItem().toString();
-                                    userkey=df.push().getKey();
-                                    HashMap<String,String> hashMap=new HashMap<>();
-                                    hashMap.put("imgurl",String.valueOf(uri));
-                                    hashMap.put("name",name);
-                                    hashMap.put("id",id);
-                                    hashMap.put("cg",cg);
-                                    hashMap.put("department",text);
-                                    hashMap.put("propaganda",propaganda);
-                                    hashMap.put("key",userkey);
-                                    hashMap.put("event",event);
-                                    hashMap.put("post",post);
+                                public void onSuccess(final Uri uri) {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-                                    df1.child(userkey).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Toast.makeText(getActivity(),"Your request is sent to Admin for approval",Toast.LENGTH_SHORT).show();
+                                    builder.setTitle("Confirm");
+                                    builder.setMessage("Are you sure?");
+
+                                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // Do nothing but close the dialog
+                                            name=nameedit.getText().toString();
+                                            cg=cgedit.getText().toString();
+                                            id=idedit.getText().toString();
+                                            propaganda=proedit.getText().toString();
+                                            text = spinner.getSelectedItem().toString();
+                                            event=eventspinner.getSelectedItem().toString();
+                                            post=postspinner.getSelectedItem().toString();
+                                            userkey=df.push().getKey();
+                                            lvl=lvlspin.getSelectedItem().toString();
+                                            HashMap<String,String> hashMap=new HashMap<>();
+                                            hashMap.put("imgurl",String.valueOf(uri));
+                                            hashMap.put("name",name);
+                                            hashMap.put("id",id);
+                                            hashMap.put("cg",cg);
+                                            hashMap.put("dept",text);
+                                            hashMap.put("propaganda",propaganda);
+                                            hashMap.put("key",userkey);
+                                            hashMap.put("event",event);
+                                            hashMap.put("post",post);
+                                            hashMap.put("level",lvl);
+
+                                            df1.child(userkey).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Toast.makeText(getActivity(),"Your request is sent to Admin for approval",Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+
+                                            dialog.dismiss();
                                         }
                                     });
+
+                                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                            // Do nothing
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                                    AlertDialog alert = builder.create();
+                                    alert.show();
+
+                                    //DatabaseReference imgstore= FirebaseDatabase.getInstance().getReference().child("test");
+
                                 }
                             });
                         }

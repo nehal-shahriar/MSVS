@@ -9,19 +9,38 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class osmanyhallcapt extends AppCompatActivity {
     Button candidatepro,givevotebtn,confirmbtn;
+    TextView datea,starta,enda,maineventtxt,mainposttxt;
+    String x,y,z,mainevent,mainpost;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_osmanyhallcapt);
         candidatepro=findViewById(R.id.candidatepro);
         givevotebtn=findViewById(R.id.givevotebtn);
+        datea=findViewById(R.id.datetexta);
+        starta=findViewById(R.id.starttexta);
+        enda=findViewById(R.id.finishtexta);
+        maineventtxt=findViewById(R.id.maineventtext);
+        mainposttxt=findViewById(R.id.mainposttext);
         confirmbtn=findViewById(R.id.confirmbtn);
+
+        x=getIntent().getStringExtra("date");
+        y=getIntent().getStringExtra("start");
+        z=getIntent().getStringExtra("end");
+        mainevent=getIntent().getStringExtra("event");
+        mainpost=getIntent().getStringExtra("post");
+        datea.setText(x);
+        starta.setText(y);
+        enda.setText(z);
+        maineventtxt.setText(mainevent);
+        mainposttxt.setText(mainpost);
         givevotebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,6 +52,8 @@ public class osmanyhallcapt extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(osmanyhallcapt.this, candidateprofile.class);
+                intent.putExtra("event",mainevent);
+                intent.putExtra("post",mainpost);
                 startActivity(intent);
             }
         });

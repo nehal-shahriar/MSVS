@@ -66,7 +66,7 @@ public class createvotevent extends Fragment {
         datetxt=view.findViewById(R.id.datetxt);
         strttimetxt=view.findViewById(R.id.starttimetxt);
         endtimetxt=view.findViewById(R.id.endtimetxt);
-        df= FirebaseDatabase.getInstance().getReference().child("Vote_events");
+        df= FirebaseDatabase.getInstance().getReference().child("Events");
         addcanbtn=view.findViewById(R.id.addcanbtn);
         addcanbtn.setOnClickListener(new View.OnClickListener() {
             @Override

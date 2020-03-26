@@ -76,11 +76,12 @@ public class addcandidatebyadmin extends Fragment {
                         intent.putExtra("name",model.getName());
                         intent.putExtra("cg",model.getCg());
                         intent.putExtra("id",model.getId());
-                        intent.putExtra("department",model.getDepartment());
+                        intent.putExtra("department",model.getDept());
                         intent.putExtra("propaganda",model.getPropaganda());
                         intent.putExtra("imgurl",model.getImgurl());
                         intent.putExtra("event",model.getEvent());
                         intent.putExtra("post",model.getPost());
+                        intent.putExtra("level",model.getLevel());
                         startActivity(intent);
                     }
                 });

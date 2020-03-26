@@ -13,8 +13,8 @@
 
         <TextView
             android:id="@+id/teamone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="152dp"
+            android:layout_height="33dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
@@ -51,8 +51,8 @@
 
         <TextView
             android:id="@+id/teamtwo"
-            android:layout_width="79dp"
-            android:layout_height="24dp"
+            android:layout_width="146dp"
+            android:layout_height="32dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
@@ -78,10 +78,24 @@
             android:text="delete"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.938"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.632" />
+            app:layout_constraintVertical_bias="0.428" />
+
+        <ImageView
+            android:id="@+id/candimage"
+            android:layout_width="108dp"
+            android:layout_height="101dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.914"
+            app:layout_constraintStart_toStartOf="@+id/teamone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.656"
+            app:srcCompat="@drawable/img" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

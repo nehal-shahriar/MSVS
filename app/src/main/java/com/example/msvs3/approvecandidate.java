@@ -25,7 +25,7 @@ public class approvecandidate extends AppCompatActivity {
     ImageView candidateImageview;
     Button canapprovebtn;
     private DatabaseReference df;
-    String teama,teamb,teamc,teamd,teame,teamf,teamg,teamh;
+    String teama,teamb,teamc,teamd,teame,teamf,teamg,teamh,teami;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +46,7 @@ public class approvecandidate extends AppCompatActivity {
         teamf =getIntent().getStringExtra("event");
         teamg =getIntent().getStringExtra("post");
         teamh= getIntent().getStringExtra("id");
+        teami=getIntent().getStringExtra("level");
         //Log.i("OUR VALUE",teamone);
         //Log.i("OUR VALUE 2",teamtwo);
         //Log.i("OUR VALUE 3",teamthree);
@@ -68,6 +69,7 @@ public class approvecandidate extends AppCompatActivity {
                 candi.setCg(teamb);
                 candi.setPropaganda(teamd);
                 candi.setImgurl(teame);
+                candi.setLevel(teami);
                 String x=df.push().getKey();
                 candi.setKey(x);
                 df.child(teamf).child(teamg).child(x).setValue(candi);

@@ -27,7 +27,7 @@ public class FirebaseViewHolder extends RecyclerView.ViewHolder {
         teamdept=itemView.findViewById(R.id.teamdept);
         deletebtn=itemView.findViewById(R.id.deletebtn);
         deletecandbtn=itemView.findViewById(R.id.deletecandbtn);
-        //candidateimg=itemView.findViewById(R.id.candidateimg);
+        candidateimg=itemView.findViewById(R.id.candimage);
 
     }
 }

@@ -15,6 +15,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,7 @@ public class candidateprofile extends AppCompatActivity {
     private FirebaseRecyclerOptions<DataSetFire> options;
     private FirebaseRecyclerAdapter<DataSetFire,FirebaseViewHolder> adapter;
     private DatabaseReference df;
+    String finalevent,finalpost;
 
     @Override
     protected void onStart() {
@@ -48,7 +50,9 @@ public class candidateprofile extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         arrayList=new ArrayList<DataSetFire>();
-        df= FirebaseDatabase.getInstance().getReference().child("Info");
+        finalevent=getIntent().getStringExtra("event");
+        finalpost=getIntent().getStringExtra("post");
+        df= FirebaseDatabase.getInstance().getReference().child("Approvedcandidate").child(finalevent).child(finalpost);
         df.keepSynced(true);
         options=new FirebaseRecyclerOptions.Builder<DataSetFire>().setQuery(df,DataSetFire.class).build();
 
@@ -58,13 +62,18 @@ public class candidateprofile extends AppCompatActivity {
                 firebaseViewHolder.teamone.setText(model.getName());
                 firebaseViewHolder.teamtwo.setText(model.getId());
                 firebaseViewHolder.teamthree.setText(model.getDept());
+                Picasso.get().load(model.getImgurl()).into(firebaseViewHolder.candidateimg);
                 firebaseViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent=new Intent(candidateprofile.this,detailedprofile.class);
                         intent.putExtra("name",model.getName());
+                        intent.putExtra("cg",model.getCg());
                         intent.putExtra("id",model.getId());
                         intent.putExtra("dept",model.getDept());
+                        intent.putExtra("propaganda",model.getPropaganda());
+                        intent.putExtra("imgurl",model.getImgurl());
+                        intent.putExtra("lvl",model.getLevel());
                         startActivity(intent);
                     }
                 });
