@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
  */
 public class votevents extends Fragment {
     View view;
-    Button osmanycaptbtn, processbtn, sportcaptbtn, crbtn;
+    Button processbtn;
     String votename,postname;
     Spinner votespin,postspin;
     TextView date,start,end;
@@ -55,7 +55,6 @@ public class votevents extends Fragment {
         processbtn=view.findViewById(R.id.processbtn);
         votespin=view.findViewById(R.id.eventspin);
         postspin=view.findViewById(R.id.postspin);
-        osmanycaptbtn=view.findViewById(R.id.osmanycaptbtn);
         date=view.findViewById(R.id.datetxtb);
         start=view.findViewById(R.id.starttxtb);
         end=view.findViewById(R.id.endtxtb);

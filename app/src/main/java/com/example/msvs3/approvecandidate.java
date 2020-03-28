@@ -1,5 +1,6 @@
 package com.example.msvs3;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Bitmap;
@@ -14,8 +15,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
@@ -25,7 +30,9 @@ public class approvecandidate extends AppCompatActivity {
     ImageView candidateImageview;
     Button canapprovebtn;
     private DatabaseReference df;
-    String teama,teamb,teamc,teamd,teame,teamf,teamg,teamh,teami;
+    String teama,teamb,teamc,teamd,teame,teamf,teamg,teamh,teami,x;
+    DataSetFire candi;
+    int flag=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +45,7 @@ public class approvecandidate extends AppCompatActivity {
         appeventtxt=findViewById(R.id.appeventtxt);
         appposttxt=findViewById(R.id.appposttxt);
         canapprovebtn=findViewById(R.id.canapprovebtn);
+        candi=new DataSetFire();
         teama =getIntent().getStringExtra("name");
         teamb =getIntent().getStringExtra("cg");
         teamc = getIntent().getStringExtra("department");
@@ -61,8 +69,8 @@ public class approvecandidate extends AppCompatActivity {
         canapprovebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                df= FirebaseDatabase.getInstance().getReference().child("Approvedcandidate");
-                DataSetFire candi=new DataSetFire();
+                df = FirebaseDatabase.getInstance().getReference().child("Approvedcandidate");
+
                 candi.setName(teama);
                 candi.setId(teamh);
                 candi.setDept(teamc);
@@ -70,16 +78,41 @@ public class approvecandidate extends AppCompatActivity {
                 candi.setPropaganda(teamd);
                 candi.setImgurl(teame);
                 candi.setLevel(teami);
-                String x=df.push().getKey();
+                x = df.push().getKey();
                 candi.setKey(x);
-                df.child(teamf).child(teamg).child(x).setValue(candi);
-                Toast.makeText(approvecandidate.this,"candidate is approved",Toast.LENGTH_SHORT).show();
+                Query query = df.child(teamf).child(teamg).orderByChild("id").equalTo(teamh);
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                            if (dataSnapshot.hasChildren()) {
+                                flag = 1;
+                                break;
+                            }
+                        }
+                        if (flag == 0) {
+
+                            df.child(teamf).child(teamg).child(x).setValue(candi);
+                            Toast.makeText(approvecandidate.this, "candidate is approved", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(approvecandidate.this, "candidate is already approved!!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
-        });
-        //final Uri image=Uri.parse(teame);
-        //candidateImageview.setImageURI(image);
-        //new DownloadImageTask(candidateImageview).execute(teame);
-    }
+
+                });
+                //final Uri image=Uri.parse(teame);
+                //candidateImageview.setImageURI(image);
+                //new DownloadImageTask(candidateImageview).execute(teame);
+            }
+
+
         private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
             ImageView bmImage;
 

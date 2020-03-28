@@ -19,6 +19,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -66,6 +67,7 @@ public class Requestlist extends Fragment {
                 firebaseViewHolder.teamone.setText(dataSetFire.getName());
                 firebaseViewHolder.teamtwo.setText(dataSetFire.getId());
                 firebaseViewHolder.teamthree.setText(dataSetFire.getDept());
+                Picasso.get().load(dataSetFire.getImgurl()).into(firebaseViewHolder.candidateimg);
                 firebaseViewHolder.deletebtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

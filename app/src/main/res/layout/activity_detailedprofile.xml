@@ -12,7 +12,7 @@
         android:id="@+id/candidateimage"
         android:layout_width="181dp"
         android:layout_height="177dp"
-
+        android:layout_marginTop="50dp"
         tools:layout_editor_absoluteX="115dp"
         tools:layout_editor_absoluteY="102dp" />
 
@@ -56,6 +56,15 @@
         android:layout_height="40dp"
         android:text=""
         android:textSize="24sp"/>
+
+    <Button
+        android:id="@+id/votingbtn"
+        android:layout_width="137dp"
+        android:layout_height="74dp"
+        android:layout_marginLeft="140sp"
+
+        android:onClick="scanButton"
+        android:text="Give vote" />
 
 
 </LinearLayout>

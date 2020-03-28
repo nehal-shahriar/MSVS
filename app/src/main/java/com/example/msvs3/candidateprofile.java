@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class candidateprofile extends AppCompatActivity {
@@ -27,6 +28,7 @@ public class candidateprofile extends AppCompatActivity {
     private FirebaseRecyclerAdapter<DataSetFire,FirebaseViewHolder> adapter;
     private DatabaseReference df;
     String finalevent,finalpost;
+
 
     @Override
     protected void onStart() {
@@ -44,6 +46,7 @@ public class candidateprofile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_candidateprofile);
+
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         recyclerView=findViewById(R.id.recyclerview);
@@ -59,10 +62,10 @@ public class candidateprofile extends AppCompatActivity {
         adapter=new FirebaseRecyclerAdapter<DataSetFire, FirebaseViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull FirebaseViewHolder firebaseViewHolder, int i, @NonNull final DataSetFire model) {
-                firebaseViewHolder.teamone.setText(model.getName());
-                firebaseViewHolder.teamtwo.setText(model.getId());
-                firebaseViewHolder.teamthree.setText(model.getDept());
-                Picasso.get().load(model.getImgurl()).into(firebaseViewHolder.candidateimg);
+                firebaseViewHolder.teamx.setText(model.getName());
+                firebaseViewHolder.teamy.setText(model.getId());
+                firebaseViewHolder.teamz.setText(model.getDept());
+                Picasso.get().load(model.getImgurl()).into(firebaseViewHolder.candimagex);
                 firebaseViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -74,6 +77,9 @@ public class candidateprofile extends AppCompatActivity {
                         intent.putExtra("propaganda",model.getPropaganda());
                         intent.putExtra("imgurl",model.getImgurl());
                         intent.putExtra("lvl",model.getLevel());
+                        intent.putExtra("event",finalevent);
+                        intent.putExtra("post",finalpost);
+                        intent.putExtra("key",model.getKey());
                         startActivity(intent);
                     }
                 });
@@ -85,7 +91,7 @@ public class candidateprofile extends AppCompatActivity {
             @Override
             public FirebaseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-                return new FirebaseViewHolder(LayoutInflater.from(candidateprofile.this).inflate(R.layout.row,viewGroup,false));
+                return new FirebaseViewHolder(LayoutInflater.from(candidateprofile.this).inflate(R.layout.rowfordetailcandidate,viewGroup,false));
             }
         };
 

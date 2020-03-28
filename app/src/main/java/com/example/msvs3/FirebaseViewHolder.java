@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 public class FirebaseViewHolder extends RecyclerView.ViewHolder {
     public TextView teamone,teamtwo,teamthree;
     public TextView teamname,teamid,teamvoteno;
-    public ImageView candidateimg;
+    public ImageView candidateimg,candimagex;
     public Button deletebtn,deletecandbtn;
     public TextView teamname1,teamcg,teamdept;
+    public TextView teamx,teamy,teamz;
     public FirebaseViewHolder(@NonNull View itemView) {
         super(itemView);
         teamone=itemView.findViewById(R.id.teamone);
@@ -28,6 +29,9 @@ public class FirebaseViewHolder extends RecyclerView.ViewHolder {
         deletebtn=itemView.findViewById(R.id.deletebtn);
         deletecandbtn=itemView.findViewById(R.id.deletecandbtn);
         candidateimg=itemView.findViewById(R.id.candimage);
-
+        teamx=itemView.findViewById(R.id.teamx);
+        teamy=itemView.findViewById(R.id.teamy);
+        teamz=itemView.findViewById(R.id.teamz);
+        candimagex=itemView.findViewById(R.id.candimagex);
     }
 }

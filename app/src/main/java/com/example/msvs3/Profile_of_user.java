@@ -29,8 +29,8 @@ public class Profile_of_user extends AppCompatActivity {
     DatabaseReference df;
     EditText searchedit;
     //Button probtn;
-    String barcoderesult;
-    private static String studentid;
+
+    private static String studentid,barcoderesult,studentname,studentdept;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +66,12 @@ public class Profile_of_user extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String a = "" + ds.child("name").getValue(String.class);
+                    studentname = "" + ds.child("name").getValue(String.class);
                     studentid = "" + ds.child("id").getValue(String.class);
-                    String c = "" + ds.child("dept").getValue(String.class);
+                    studentdept = "" + ds.child("dept").getValue(String.class);
                     String d=ds.child("imgurl").getValue(String.class);
-                    pronametxt.setText(a);
-                    prodepttext.setText(c);
+                    pronametxt.setText(studentname);
+                    prodepttext.setText(studentdept);
                     proidtxt.setText(studentid);
                     Picasso.get().load(d).into(proimgview);
 
